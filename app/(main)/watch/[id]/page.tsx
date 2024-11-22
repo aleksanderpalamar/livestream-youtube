@@ -68,7 +68,7 @@ export default function WatchPage() {
     <div className="flex flex-col h-[calc(100vh-64px)] bg-zinc-900">
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Área do Player */}
-        <div className="lg:w-3/4 h-full flex flex-col">
+        <div className="lg:w-3/4 h-full flex flex-col mt-20">
           <div className="relative pt-[56.25%] bg-black">
             <iframe
               src={`https://www.youtube.com/embed/${stream.id}?autoplay=1`}
@@ -77,7 +77,7 @@ export default function WatchPage() {
               allowFullScreen
             />
           </div>
-          <div className="p-4 bg-zinc-800">
+          <div className="p-4 bg-zinc-950">
             <h1 className="text-xl font-bold text-white mb-2">{stream.title}</h1>
             <p className="text-sm text-gray-400">{stream.channelTitle}</p>
             <p className="text-sm text-violet-500 mt-2">

@@ -22,7 +22,7 @@ export default function WatchPage() {
       }
 
       try {
-        setLoading(true)        
+        setLoading(true)
         const streamDetails = await fetchLiveStreams(videoId)
 
         if (streamDetails) {
@@ -33,7 +33,7 @@ export default function WatchPage() {
         }
       } catch (error) {
         console.error('Error fetching stream details:', error)
-        setError('Error fetching stream details')        
+        setError('Error fetching stream details')
       } finally {
         setLoading(false)
       }
@@ -65,11 +65,11 @@ export default function WatchPage() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-64px)] bg-zinc-900">
+    <div className="flex flex-col h-[calc(100vh-64px)]">
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Área do Player */}
         <div className="lg:w-3/4 h-full flex flex-col mt-20">
-          <div className="relative pt-[56.25%] bg-black">
+          <div className="relative pt-[56.25%] bg-zinc-950">
             <iframe
               src={`https://www.youtube.com/embed/${stream.id}?autoplay=1`}
               className="absolute top-0 left-0 w-full h-full"
@@ -77,12 +77,14 @@ export default function WatchPage() {
               allowFullScreen
             />
           </div>
-          <div className="p-4 bg-zinc-950">
-            <h1 className="text-xl font-bold text-white mb-2">{stream.title}</h1>
-            <p className="text-sm text-gray-400">{stream.channelTitle}</p>
-            <p className="text-sm text-violet-500 mt-2">
-              {stream.viewerCount.toLocaleString()} espectadores
-            </p>
+          <div className="flex items-center justify-between p-4">
+            <div className="p-4">
+              <h1 className="text-xl font-bold text-white mb-2">{stream.title}</h1>
+              <p className="text-sm text-gray-400">{stream.channelTitle}</p>
+              <p className="text-sm text-violet-500 mt-2">
+                {stream.viewerCount.toLocaleString()} espectadores
+              </p>
+            </div>
           </div>
         </div>
 

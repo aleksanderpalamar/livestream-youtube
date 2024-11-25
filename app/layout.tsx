@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { Providers } from "@/providers/providers";
 import { Header } from "@/components/header";
 
 const poppinsFont = Poppins({
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <Providers>
       <html lang="en">
         <body
           className={`${poppinsFont.className} bg-zinc-950 text-zinc-50 antialiased`}
@@ -29,6 +29,6 @@ export default function RootLayout({
           {children}
         </body>
       </html>
-    </ClerkProvider>
+    </Providers>
   );
 }

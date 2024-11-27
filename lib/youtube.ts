@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getSession } from 'next-auth/react'
 
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
 
@@ -41,7 +42,8 @@ export interface LiveStream {
   viewerCount: number
 }
 
-export async function fetchVideoDetails(videoId: string): Promise<LiveStream | null> {
+export async function fetchVideoDetails(videoId: string,): Promise<LiveStream | null> {
+  
   if (!API_KEY) {
     console.error('Chave da API do YouTube não está configurada.')
     return null
@@ -78,6 +80,13 @@ export async function fetchVideoDetails(videoId: string): Promise<LiveStream | n
 }
 
 export async function fetchLiveStreams(query: string = ''): Promise<LiveStream[]> {
+  const session = await getSession()
+
+  if (!session || !session.accessToken) {
+    console.error('Usuário não autenticado ou token de acesso ausente.')
+    return []
+  }
+  
   if (!API_KEY) {
     console.error('Chave da API do YouTube não está configurada.')
     return []
@@ -91,13 +100,18 @@ export async function fetchLiveStreams(query: string = ''): Promise<LiveStream[]
           part: 'snippet',
           eventType: 'live',
           type: 'video',
-          q: query,
+          q: `${query} Brasil`,
+          videCaption: 'closedCaption',
           regionCode: 'BR',
           relevanceLanguage: 'pt',
           order: 'relevance',
-          maxResults: 12,
+          safeSearch: 'moderate',
+          maxResults: 6,
           key: API_KEY,
         },
+        headers: {
+          'Authorization': `Bearer ${session?.accessToken}`,
+        }
       }
     )
 

@@ -5,6 +5,7 @@ import { fetchLiveStreams, LiveStream } from '@/lib/youtube'
 
 import LiveStreamCard from '@/components/live-stream-card'
 import SearchBar from '@/components/search-bars'
+import { Header } from './header'
 
 export default function LiveStreamList() {
   const [liveStreams, setLiveStreams] = useState<LiveStream[]>([])
@@ -44,7 +45,10 @@ export default function LiveStreamList() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 container mx-auto px-4 py-8">
+      <div className="mb-20 relative">
+        <Header />
+      </div>
       <SearchBar onSearch={handleSearch} />
       <h2 className="text-2xl font-bold text-white">
         Canais ao vivo {searchQuery ? `"${searchQuery}"` : ''}

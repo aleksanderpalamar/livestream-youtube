@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/providers";
-import { Header } from "@/components/header";
 
 const poppinsFont = Poppins({
   subsets: ["latin"],
@@ -25,7 +24,6 @@ export default function RootLayout({
         <body
           className={`${poppinsFont.className} bg-zinc-950 text-zinc-50 antialiased`}
         >
-          <Header />
           {children}
         </body>
       </html>
